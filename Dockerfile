@@ -14,8 +14,9 @@ RUN yum update -y && \
     yum install -y wget && \
     yum install -y tar
 
-RUN wget ftp://ftp.cubrid.org/CUBRID_Engine/10.1/CUBRID-10.1.0.7663-1ca0ab8-Linux.x86_64.tar.gz
-RUN tar xfz CUBRID-10.1.0.7663-1ca0ab8-Linux.x86_64.tar.gz
+RUN wget ftp://ftp.cubrid.org/CUBRID_Engine/9.2/CUBRID-9.2.29.0001-linux.x86_64.tar.gz
+RUN tar xfz CUBRID-9.2.29.0001-linux.x86_64.tar.gz
+RUN chown -R root.root CUBRID
 RUN mkdir -p $CUBRID_DATABASES/demodb
 RUN cubrid createdb --db-volume-size=20M --log-volume-size=20M -F $CUBRID_DATABASES/demodb demodb en_US && \
 	cubrid loaddb -u dba -s $CUBRID/demo/demodb_schema -d $CUBRID/demo/demodb_objects demodb
